@@ -3,14 +3,26 @@ using System.Collections;
 
 public class GroundMover : MonoBehaviour {
 		
-	public float speed = -2.0f;
+	Rigidbody2D player;
+
+
+	void Start () 
+	{
+		GameObject player_go = GameObject.FindGameObjectWithTag ("Player");
+		if (player_go == null) 
+		{
+			Debug.LogError("Could not find object with tag player !");
+			return;
+		}
+		player = player_go.rigidbody2D;
+	}
 
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		Vector3 pos = transform.position;
-		pos.x += speed * Time.deltaTime;
-		transform.position = pos;
+		float vel = player.velocity.x * 0.9f;
+
+		transform.position = transform.position + Vector3.right * vel * Time.deltaTime;
 	
 	}
 }
