@@ -8,7 +8,9 @@ public class BirdMovement : MonoBehaviour
 	float forwardSpeed = 11f;
 
 	bool didFlap = false;
-	bool dead = false;
+	public bool dead = false;
+	float deathCooldown;
+
 	public bool GodMode = false;
 	Animator animator;
 
@@ -20,9 +22,19 @@ public class BirdMovement : MonoBehaviour
 	// Do Grahic & Inputs here
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) 
+		if (dead) 
 		{
-			didFlap = true;
+			deathCooldown-= Time.deltaTime;
+			if(deathCooldown <= 0 ){
+				if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0))
+					Application.LoadLevel( Application.loadedLevel);
+			}
+		} 
+		else
+		{
+			if (Input.GetKeyDown (KeyCode.Space) || Input.GetMouseButtonDown (0)) {
+					didFlap = true;
+			}
 		}
 	}
 	
@@ -56,5 +68,7 @@ public class BirdMovement : MonoBehaviour
 		}
 		animator.SetTrigger ("Dead");
 		dead = true;
+		deathCooldown = 0.5f;
+
 	}
 }
