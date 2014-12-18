@@ -3,13 +3,20 @@ using System.Collections;
 
 public class score : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	static  int scoreTracker = 0;
+	static int highScore = 0;
+
+	static public void AddPoint()
+	{
+		if (scoreTracker > highScore) {
+			highScore = scoreTracker;		
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		guiText.text = "Score " + scoreTracker + "\nHighScore " + highScore;
 	
 	}
 }

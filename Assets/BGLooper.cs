@@ -25,7 +25,7 @@ public class BGLooper : MonoBehaviour
 
 		Vector3 pos = col.transform.position;
 
-		pos.x += withOfBgObject * numBGPanels - withOfBgObject;
+		pos.x += withOfBgObject * numBGPanels;
 
 		if (col.tag == "pipe") 
 		{
